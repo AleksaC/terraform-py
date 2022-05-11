@@ -16,8 +16,8 @@ from setuptools import setup
 from setuptools.command.install import install as orig_install
 
 
-TERRAFORM_VERSION = "0.8.6"
-ARCHIVE_SHA256 = {'darwin_amd64': ('terraform_0.8.6_darwin_amd64.zip', '0b80dedb16ab6583afcf66e9b03d3714fbfa44b827094420956d807b710e4fd6'), 'linux_amd64': ('terraform_0.8.6_linux_amd64.zip', '2b4f330e70b757a640ba8d4e1eada86445240b5f8cd43194d878e0c05175f6c0'), 'windows_amd64': ('terraform_0.8.6_windows_amd64.zip', '1056a8d8644c1787b2be29f2e12619123040cacd66b9acef43473702eb5ba7d8')}
+TERRAFORM_VERSION = "0.8.7"
+ARCHIVE_SHA256 = {'darwin_amd64': ('terraform_0.8.7_darwin_amd64.zip', 'ba53c7424bec5db7c01e0a5178ba5e295eb13669fb04fdae41576098baf88b75'), 'linux_amd64': ('terraform_0.8.7_linux_amd64.zip', '7ca424d8d0e06697cc7f492b162223aef525bfbcd69248134a0ce0b529285c8c'), 'windows_amd64': ('terraform_0.8.7_windows_amd64.zip', 'dcd2cacfec4f9d6e9834d9c2cfef9b7b868e191001d88607f088dc93406054bd')}
 
 
 def get_download_url() -> str:
