@@ -1,0 +1,15 @@
+- id: tf-fmt
+  name: terraform fmt
+  description: Run terraform fmt
+  require_serial: true
+  entry: terraform-py fmt
+  language: python
+  types: [terraform]
+
+- id: tf-validate
+  name: terraform validate
+  description: Run terraform validate
+  require_serial: true
+  entry: terraform-py validate
+  language: python
+  types: [terraform]
