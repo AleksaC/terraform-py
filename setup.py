@@ -16,14 +16,22 @@ from setuptools import setup
 from setuptools.command.install import install as orig_install
 
 
-TERRAFORM_VERSION = "1.1.9"
-ARCHIVE_SHA256 = {'darwin_amd64': ('terraform_1.1.9_darwin_amd64.zip', 'c902b3c12042ac1d950637c2dd72ff19139519658f69290b310f1a5924586286'), 'darwin_arm64': ('terraform_1.1.9_darwin_arm64.zip', '918a8684da5a5529285135f14b09766bd4eb0e8c6612a4db7c121174b4831739'), 'linux_amd64': ('terraform_1.1.9_linux_amd64.zip', '9d2d8a89f5cc8bc1c06cb6f34ce76ec4b99184b07eb776f8b39183b513d7798a'), 'linux_arm64': ('terraform_1.1.9_linux_arm64.zip', 'e8a09d1fe5a68ed75e5fabe26c609ad12a7e459002dea6543f1084993b87a266'), 'windows_amd64': ('terraform_1.1.9_windows_amd64.zip', 'ab4df98d2256a74c151ea7ccfd69a4ad9487b4deba86a61727fb07a1348311cc')}
+TERRAFORM_VERSION = "0.6.0"
+ARCHIVE_SHA256 = {'darwin_amd64': ('terraform_0.6.0_darwin_amd64.zip', 'c519d3d18d5a2b0605bff6e0ca7bb677ea85c833f8e8dbb4af6a48e0ebf76cad'), 'linux_amd64': ('terraform_0.6.0_linux_amd64.zip', '7346bd793136d17f646ebbd9d0e797c61b5a32a032632d01ae8d32e3d6952704'), 'windows_amd64': ('terraform_0.6.0_windows_amd64.zip', '7f1a30613d9dc4e43a9faab0a16040194013b8713bd9ca5ff1e49bb40371ca25')}
 
 
 def get_download_url() -> str:
     os, arch = platform.system().lower(), platform.machine().lower()
-    if os == "windows" or "x86" in arch or "amd" in arch or "i386" in arch:
+    if (
+        os == "windows"
+        or "x86" in arch
+        or "amd" in arch
+        or "i386" in arch
+        or "i686" in arch
+    ):
         arch = "amd"
+    elif "arm" in arch or arch == "aarch64":
+        arch = "arm"
 
     archive, sha256 = ARCHIVE_SHA256[f"{os}_{arch}64"]
     url = f"https://releases.hashicorp.com/terraform/" f"{TERRAFORM_VERSION}/{archive}"
