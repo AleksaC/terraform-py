@@ -16,8 +16,8 @@ from setuptools import setup
 from setuptools.command.install import install as orig_install
 
 
-TERRAFORM_VERSION = "1.0.6"
-ARCHIVE_SHA256 = {'darwin_amd64': ('terraform_1.0.6_darwin_amd64.zip', '3a97f2fffb75ac47a320d1595e20947afc8324571a784f1bd50bd91e26d5648c'), 'darwin_arm64': ('terraform_1.0.6_darwin_arm64.zip', 'aaff1eccaf4099da22fe3c6b662011f8295dad9c94a35e1557b92844610f91f3'), 'linux_amd64': ('terraform_1.0.6_linux_amd64.zip', '6a454323d252d34e928785a3b7c52bfaff1192f82685dfee4da1279bb700b733'), 'linux_arm64': ('terraform_1.0.6_linux_arm64.zip', '2047f8afc7d0d7b645a0422181ba3fe47b3547c4fe658f95eebeb872752ec129'), 'windows_amd64': ('terraform_1.0.6_windows_amd64.zip', '4e292555e71491c859e82b6995548dd43cb43c1b826359f60ac624ccd1111de4')}
+TERRAFORM_VERSION = "1.0.7"
+ARCHIVE_SHA256 = {'darwin_amd64': ('terraform_1.0.7_darwin_amd64.zip', '80ae021d6143c7f7cbf4571f65595d154561a2a25fd934b7a8ccc1ebf3014b9b'), 'darwin_arm64': ('terraform_1.0.7_darwin_arm64.zip', 'cbab9aca5bc4e604565697355eed185bb699733811374761b92000cc188a7725'), 'linux_amd64': ('terraform_1.0.7_linux_amd64.zip', 'bc79e47649e2529049a356f9e60e06b47462bf6743534a10a4c16594f443be7b'), 'linux_arm64': ('terraform_1.0.7_linux_arm64.zip', '4e71a9e759578020750be41e945c086e387affb58568db6d259d80d123ac80d3'), 'windows_amd64': ('terraform_1.0.7_windows_amd64.zip', '88b8a4ae66367d9662a75599421e0bccbb70e6af92d64c62e91aff883c9eccc6')}
 
 
 def get_download_url() -> str:
