@@ -1,5 +1,8 @@
 # terraform-py
 
+[![Add new versions](https://github.com/AleksaC/terraform-py/actions/workflows/add-new-versions.yml/badge.svg)](https://github.com/AleksaC/terraform-py/actions/workflows/add-new-versions.yml)
+[![Run tests](https://github.com/AleksaC/terraform-py/actions/workflows/tests.yml/badge.svg)](https://github.com/AleksaC/terraform-py/actions/workflows/tests.yml)
+
 pip installable terraform binary with wrapper for pre-commit
 
 ## Contact 🙋‍♂️
