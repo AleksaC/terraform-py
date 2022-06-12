@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import argparse
 import base64
 import itertools
 import json
@@ -14,7 +15,7 @@ from typing import Any
 from typing import NamedTuple
 from typing import Optional
 
-from jinja2 import Template
+import jinja2
 
 
 VERSION_RE = re.compile("^v?(?P<major>[0-9]+)\.(?P<minor>[0-9]+)\.(?P<patch>[0-9]+)$")
@@ -43,6 +44,12 @@ class Version(NamedTuple):
 
     def __repr__(self):
         return f"{self.major}.{self.minor}.{self.patch}"
+
+
+class Template(NamedTuple):
+    src: str
+    dest: str
+    vars: dict[str, Any]
 
 
 def _get(url: str, headers: Optional[dict[str, str]] = None) -> dict:
@@ -129,28 +136,50 @@ def get_archives(version: Version) -> dict[str, tuple[str, str]]:
     return archives
 
 
-def render_setup_template(vars: dict[str, Any]) -> None:
-    with open(os.path.join(TEMPLATES_DIR, "setup.py.j2")) as f:
-        setup_py_template = f.read()
+def render_templates(templates: list[Template]) -> None:
+    for src, dest, vars in templates:
+        with open(os.path.join(TEMPLATES_DIR, src)) as f:
+            template_file = f.read()
 
-    template = Template(setup_py_template, keep_trailing_newline=True)
+        template = jinja2.Template(template_file, keep_trailing_newline=True)
 
-    with open("setup.py", "w") as f:
-        f.write(template.render(**vars))
+        with open(dest, "w") as f:
+            f.write(template.render(**vars))
 
 
 def push_tag(version: Version) -> None:
     subprocess.run(["./tag.sh", f"v{version}"], check=True)
 
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--render-only", default=False, action="store_true")
+    args = parser.parse_args(argv)
+
     versions = get_missing_versions(REPO, MIRROR_REPO)
 
     for version in versions:
         print(f"Adding new version: v{version}")
+
         archives = get_archives(version)
-        render_setup_template({"tf_version": str(version), "archives": str(archives)})
-        push_tag(version)
+
+        render_templates(
+            [
+                Template(
+                    src="setup.py.j2",
+                    dest="setup.py",
+                    vars={"tf_version": str(version), "archives": str(archives)},
+                ),
+                Template(
+                    src="README.md.j2",
+                    dest="README.md",
+                    vars={"tf_version": str(version)},
+                ),
+            ]
+        )
+
+        if not args.render_only:
+            push_tag(version)
 
     return 0
 
