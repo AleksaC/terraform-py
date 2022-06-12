@@ -7,19 +7,11 @@ import sys
 
 from typing import List
 from typing import Optional
+from typing import Set
 
 
-def get_dirs(filenames: List[str]) -> List[str]:
-    dirs: List[str] = []
-
-    curr_dir: Optional[str] = None
-    for filename in sorted(filenames):
-        dir = os.path.dirname(filename)
-        if dir != curr_dir:
-            dirs.append(dir)
-            curr_dir = dir
-
-    return dirs
+def get_dirs(filenames: List[str]) -> Set[str]:
+    return set(map(lambda filename: os.path.dirname(filename), filenames))
 
 
 def run_terraform_command(command: str, *args: str, **kwargs) -> int:
