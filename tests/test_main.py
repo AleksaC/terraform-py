@@ -44,8 +44,10 @@ def test_get_dirs():
     assert len(dirs) == len(expected_dirs) and all(dir in expected_dirs for dir in dirs)
 
 
-def test_get_dirs_root():
-    files = glob("*.tf", root_dir="testing/valid", recursive=True)
+def test_get_dirs_root(monkeypatch):
+    monkeypatch.chdir(os.path.join("testing", "valid"))
+
+    files = glob("*.tf", recursive=True)
     dirs = get_dirs(files)
 
     assert dirs == {"."}
