@@ -11,7 +11,13 @@ from typing import Set
 
 
 def get_dirs(filenames: List[str]) -> Set[str]:
-    return set(map(lambda filename: os.path.dirname(filename), filenames))
+    dirs = set(map(lambda filename: os.path.dirname(filename), filenames))
+
+    if "" in dirs:
+        dirs.remove("")
+        dirs.add(".")
+
+    return dirs
 
 
 def run_terraform_command(command: str, *args: str, **kwargs) -> int:
