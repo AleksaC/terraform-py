@@ -70,6 +70,10 @@ def get_text(url: str, headers: Optional[dict[str, str]] = None) -> str:
     return _get(url, headers).read().decode()
 
 
+def git(*args: str) -> None:
+    subprocess.run(["git", *args], check=True)
+
+
 def get_versions(repo: str, *, from_releases: bool = True) -> list[str]:
     gh_token = os.environ["GH_TOKEN"]
     auth = base64.b64encode(f"AleksaC:{gh_token}".encode()).decode()
@@ -147,8 +151,10 @@ def render_templates(templates: list[Template]) -> None:
             f.write(template.render(**vars))
 
 
-def push_tag(version: Version) -> None:
-    subprocess.run(["./tag.sh", f"v{version}"], check=True)
+def tag_version(version: str) -> None:
+    git("add", "-u")
+    git("commit", "-m", f"Add version {version}")
+    git("tag", version)
 
 
 def main(argv=None):
@@ -178,8 +184,11 @@ def main(argv=None):
             ]
         )
 
-        if not args.render_only:
-            push_tag(version)
+        tag_version(f"v{version}")
+
+        if args.push:
+            git("push")
+            git("push", "--tags")
 
     return 0
 
