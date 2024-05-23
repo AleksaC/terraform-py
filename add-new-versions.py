@@ -159,7 +159,7 @@ def tag_version(version: str) -> None:
 
 def main(argv=None):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--render-only", default=False, action="store_true")
+    parser.add_argument("--push", default=False, action="store_true")
     args = parser.parse_args(argv)
 
     versions = get_missing_versions(REPO, MIRROR_REPO)
