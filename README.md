@@ -8,6 +8,8 @@ pip installable [terraform](https://github.com/hashicorp/terraform) binary with 
 The mechanism by which the terraform binary is downloaded is adapted from
 [shellcheck-py](https://github.com/shellcheck-py/shellcheck-py).
 
+If you use [tflint](https://github.com/terraform-linters/tflint), you may also find [tflint-py](https://github.com/AleksaC/tflint-py) useful.
+
 ## Getting started
 
 ### Installation
