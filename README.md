@@ -8,8 +8,6 @@ pip installable [terraform](https://github.com/hashicorp/terraform) binary with 
 The mechanism by which the terraform binary is downloaded is adapted from
 [shellcheck-py](https://github.com/shellcheck-py/shellcheck-py).
 
-If you use [tflint](https://github.com/terraform-linters/tflint), you may also find [tflint-py](https://github.com/AleksaC/tflint-py) useful.
-
 ## Getting started
 
 ### Installation
@@ -19,7 +17,7 @@ This package has been built to make it more convenient to run `terraform fmt`
 However you can install it using git:
 
 ```shell script
-pip install git+https://github.com/AleksaC/terraform-py.git@v1.9.2
+pip install git+https://github.com/AleksaC/terraform-py.git@v1.9.3
 ```
 
 ### pre-commit hooks
@@ -33,7 +31,7 @@ directories they are in. To use the hooks include the following config in your
 ```yaml
 repos:
   - repo: https://github.com/AleksaC/terraform-py
-    rev: v1.9.2
+    rev: v1.9.3
     hooks:
       - id: tf-fmt
       - id: tf-validate
