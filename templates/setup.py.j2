@@ -58,10 +58,7 @@ def extract(url: str, data: bytes) -> bytes:
         if ".tar." in url:
             with tarfile.open(fileobj=bio) as tarf:
                 for info in tarf.getmembers():
-                    if info.isfile() and (
-                        info.name.endswith("terraform")
-                        or info.filename.endswith(".exe")
-                    ):
+                    if info.isfile() and info.name.endswith("terraform"):
                         return tarf.extractfile(info).read()
         elif url.endswith(".zip"):
             with zipfile.ZipFile(bio) as zipf:
