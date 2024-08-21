@@ -16,8 +16,8 @@ from setuptools import setup
 from setuptools.command.install import install as orig_install
 
 
-TERRAFORM_VERSION = "1.9.4"
-ARCHIVE_SHA256 = {'darwin_amd64': ('terraform_1.9.4_darwin_amd64.zip', 'd23c34dbd84884913a939f34abfc46065f2794f43e1614d0f7b70af4e206ac8a'), 'darwin_arm64': ('terraform_1.9.4_darwin_arm64.zip', '440865e068811f5573b900b6e9822e266c1e6074eb31daccc2537d1cf24a0dd7'), 'linux_amd64': ('terraform_1.9.4_linux_amd64.zip', '6e9b2cc741875ab906d800af3134b076489f049565e0a1dbdb6deacd91f5054c'), 'linux_arm64': ('terraform_1.9.4_linux_arm64.zip', 'ada5a330c09456df091bd2449c80884e3e368b80978d5849c940129047f43d1a'), 'windows_amd64': ('terraform_1.9.4_windows_amd64.zip', 'd9b0dcc5e7d31a290bf77f662a969d45e5ed1b760b4c2e0e2ab2770ba426d27f')}
+TERRAFORM_VERSION = "1.9.5"
+ARCHIVE_SHA256 = {'darwin_amd64': ('terraform_1.9.5_darwin_amd64.zip', 'c28945c377d04b1d237f704729258234c471c8c4f617a1303042862f708ebbc6'), 'darwin_arm64': ('terraform_1.9.5_darwin_arm64.zip', 'b7eca5cd6f0f6644d45d8708c1b864e64a9e26c355d2c9b585faa049f640fe71'), 'linux_amd64': ('terraform_1.9.5_linux_amd64.zip', '9cf727b4d6bd2d4d2908f08bd282f9e4809d6c3071c3b8ebe53558bee6dc913b'), 'linux_arm64': ('terraform_1.9.5_linux_arm64.zip', 'adb3206971bc73fd37c7b50399ef79fe5610b03d3f2d1783d91e119422a113fd'), 'windows_amd64': ('terraform_1.9.5_windows_amd64.zip', '61215a66b478ac8143e3c5c3de8b5b604a36ac5b40b94d10b8500da23c9bfce9')}
 
 
 def get_download_url() -> str:
@@ -58,10 +58,7 @@ def extract(url: str, data: bytes) -> bytes:
         if ".tar." in url:
             with tarfile.open(fileobj=bio) as tarf:
                 for info in tarf.getmembers():
-                    if info.isfile() and (
-                        info.name.endswith("terraform")
-                        or info.filename.endswith(".exe")
-                    ):
+                    if info.isfile() and info.name.endswith("terraform"):
                         return tarf.extractfile(info).read()
         elif url.endswith(".zip"):
             with zipfile.ZipFile(bio) as zipf:
