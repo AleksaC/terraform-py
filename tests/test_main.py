@@ -1,11 +1,14 @@
 import os
 from glob import glob
+from hashlib import sha256
+from shutil import copy
 
 import pytest
 
 from terraform_py._main import fmt
 from terraform_py._main import get_dirs
 from terraform_py._main import main
+from terraform_py._main import providers_lock
 from terraform_py._main import run_terraform_command
 from terraform_py._main import validate
 
@@ -37,6 +40,7 @@ def test_get_dirs():
         os.path.join("testing", "valid"),
         os.path.join("testing", "invalid"),
         os.path.join("testing", "malformatted"),
+        os.path.join("testing", "missing-hash"),
         os.path.join("testing", "nested", "invalid"),
         os.path.join("testing", "nested", "malformatted"),
     }
@@ -107,3 +111,20 @@ def test_validate_cli():
     files = glob("testing/**/*.tf", recursive=True)
 
     assert main(["validate", *files]) != 0
+
+
+def test_providers_lock_valid():
+    return_code = providers_lock("testing/valid")
+
+    assert return_code == 0
+
+
+def test_providers_lock_missing_hash():
+    before_lock = sha256(open("testing/missing-hash/.terraform.lock.hcl", "rb").read())
+    return_code = providers_lock("testing/missing-hash")
+    after_lock = sha256(open("testing/missing-hash/.terraform.lock.hcl", "rb").read())
+    # restore file
+    copy("testing/valid/.terraform.lock.hcl", "testing/missing-hash/.terraform.lock.hcl")
+
+    assert return_code == 0
+    assert before_lock != after_lock

@@ -13,3 +13,18 @@
   entry: terraform-py validate
   language: python
   types: [terraform]
+
+- id: tf-providers-lock
+  name: terraform providers lock
+  description: Run terraform providers lock
+  require_serial: true
+  pass_filenames: false
+  entry: terraform-py providers_lock
+  args:
+    - --platform=linux_arm64
+    - --platform=linux_amd64
+    - --platform=darwin_amd64
+    - --platform=darwin_arm64
+    - ./
+  language: python
+  types: [terraform]
