@@ -1,8 +1,8 @@
 # terraform-py
 
 > [!TIP]
-> Check out [tffumpt](https://github.com/AleksaC/tffumpt). It's a terraform formatter compatible
-> with terraform fmt, but with extra rules. It has a first-class pre-commit integration!
+> Check out [tffumpt](https://github.com/AleksaC/tffumpt), a terraform formatter compatible with
+> terraform fmt, but with additional formatting rules. It has a first-class pre-commit integration!
 
 [![Add new versions](https://github.com/AleksaC/terraform-py/actions/workflows/add-new-versions.yml/badge.svg)](https://github.com/AleksaC/terraform-py/actions/workflows/add-new-versions.yml)
 [![Run tests](https://github.com/AleksaC/terraform-py/actions/workflows/tests.yml/badge.svg)](https://github.com/AleksaC/terraform-py/actions/workflows/tests.yml)
