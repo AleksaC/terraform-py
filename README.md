@@ -21,7 +21,7 @@ This package has been built to make it more convenient to run `terraform fmt`
 However you can install it using git:
 
 ```shell script
-pip install git+https://github.com/AleksaC/terraform-py.git@v1.14.4
+pip install git+https://github.com/AleksaC/terraform-py.git@v1.14.5
 ```
 
 ### pre-commit hooks
@@ -35,7 +35,7 @@ directories they are in. To use the hooks include the following config in your
 ```yaml
 repos:
   - repo: https://github.com/AleksaC/terraform-py
-    rev: v1.14.4
+    rev: v1.14.5
     hooks:
       - id: tf-fmt
       - id: tf-validate
